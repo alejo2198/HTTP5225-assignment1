@@ -43,7 +43,7 @@
                 <p class="card-subtitle">'.'Plays for: ' . $player['city'] .' ' .  $player['nickname'] . '</p> 
                 <span class="badge bg-info">' . $player['abbreviation'] . '</span>
                 <span class="badge bg-secondary mb-4">' . $player['city'] . '</span>
-                <a href="'$player_link'" class="card-link" style="display:block"> Player Info on NBA Site </a>
+                <a href="'.$player_link.'" class="card-link" style="display:block"> Player Info on NBA Site </a>
               </div>
             </div>
           </div>';   
