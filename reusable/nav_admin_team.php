@@ -7,16 +7,16 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.php">Players</a>
+            <a class="nav-link active" aria-current="page" href="../player/index.php">Players</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="team.php">Teams</a>
+            <a class="nav-link" href="index.php">Teams</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="logout.php">Logout</a>
+            <a class="nav-link" href="../../logout.php">Logout</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="login.php">LogIn</a>
+            <a class="nav-link" href="../../login.php">LogIn</a>
           </li>
         </ul>
       </div>
