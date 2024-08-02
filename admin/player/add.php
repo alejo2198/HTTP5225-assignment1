@@ -1,6 +1,8 @@
 <?php 
+session_start();
 include('../../reusable/nav_admin_player.php'); 
 require('../../reusable/con.php');
+require('../../reusable/notification.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $first_name = $_POST['first_name'];
@@ -11,9 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $query = "INSERT INTO player (full_name, first_name, last_name, is_active, team_id) VALUES ('$full_name', '$first_name', '$last_name', '$is_active', '$team_id')";
     if (mysqli_query($connect, $query)) {
+        setNotification('Player added successfully!');
         header("Location: index.php");
         exit();
     } else {
+        setNotification('Error: ' . mysqli_error($connect));
         echo "Error: " . $query . "<br>" . mysqli_error($connect);
     }
    
@@ -72,6 +76,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
+<?php 
+      require('../../reusable/con.php');
+      $query = 'SELECT * FROM team';
+      $teams = mysqli_query($connect, $query);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,13 +112,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label class="form-check-label" for="is_active">Active</label>
             </div>
             <div class="mb-3">
-                <label for="team_id" class="form-label">Team ID</label>
-                <input type="number" class="form-control" id="team_id" name="team_id" required>
+                <label for="team_id" class="form-label">Select a Team</label>
+                <select class="form-select" name="team_id" id="team_id">
+                    <?php
+                        foreach($teams as $team){
+                            echo '<option class="form-control" value="'. $team['id'].'">'. $team['full_name'] .'</option>';}
+                    ?>
+                </select>
             </div>
-             <div class="mb-3">
+
+             <!-- <div class="mb-3">
                 <label for="image" class="form-label">Player Image</label>
                 <input type="file" name="image" accept="image/*" required>
-            </div>
+            </div> -->
             
             <button type="submit" class="btn btn-success">Add Player</button>
     </div>

@@ -1,3 +1,14 @@
+<?php
+session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include('../../reusable/nav_admin_team.php');
+require('../../reusable/con.php');
+require('../../reusable/notification.php');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,14 +18,15 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body class="bg-secondary p-2 text-dark bg-opacity-75" >
-    <?php include('../../reusable/nav_admin_team.php'); ?>
- 
+<?php displayNotification(); ?>
   <div class="container-fluid">
     <div class="container">
       <div class="row">
         <div class="col">
           <h1 class="display-4 mt-5 mb-5 text-light">All Teams</h1>
-          <a href="add.php">Add a Team</a>
+          <div class="d-flex justify-content-end">
+            <a href="add.php" class="btn btn-success mb-3">Add New Team</a>
+          </div>
         </div>
       </div>
     </div>
@@ -51,13 +63,13 @@
                     <div class="col">
                       <form action="inc/deleteTeam.php" method="GET">
                         <input type="hidden" name="id" value="' . $team['id'] . '"> 
-                        <button type="submit" class="btn">Delete Team</button>
+                        <button type="submit" class="btn btn-danger mt-2">Delete Team</button>
                       </form>
                     </div>
                     <div class="col">
                       <form action="update.php" method="GET">
                         <input type="hidden" name="id" value="' . $team['id'] . '"> 
-                        <button type="submit" class="btn">Update Team</button>
+                        <button type="submit" class="btn btn-primary mt-2">Update Team</button>
                       </form>
                     </div>
                   </div>

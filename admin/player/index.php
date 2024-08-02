@@ -1,3 +1,14 @@
+<?php
+session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include('../../reusable/nav_admin_player.php');
+require('../../reusable/con.php');
+require('../../reusable/notification.php');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +18,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body class="bg-secondary p-2 text-dark bg-opacity-75" >
-  <?php include('../../reusable/nav_admin_player.php'); ?>
+  <?php displayNotification(); ?>
   <div class="container-fluid">
     <div class="container">
       <div class="row">
@@ -34,6 +45,8 @@
       // echo print_r($players);
       // echo '</pre>';
   ?>
+
+
 
   <div class="container-fluid">
     <div class="container">

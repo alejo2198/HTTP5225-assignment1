@@ -1,6 +1,8 @@
 <?php
+    session_start();
     require('inc/functions.php');
     require('../../reusable/con.php');
+    require('../../reusable/notification.php');
     $id = $_GET['id'];
     $query = "SELECT * FROM team WHERE `id` = '$id'";
     $team = mysqli_query($connect, $query);

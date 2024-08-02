@@ -1,4 +1,5 @@
 <?php
+  session_start();
   if(isset($_POST['updateTeam'])){
     $id = $_POST['id'];
     $teamName = $_POST['teamName'];
@@ -8,8 +9,8 @@
     $teamState = $_POST['teamState'];
     $teamYearFounded = $_POST['teamYearFounded'];
 
-    require('functions.php'); 
     require('../../../reusable/con.php');
+    require('../../../reusable/notification.php');
   
     $query = "UPDATE `team` SET 
                   `full_name`='$teamName',
@@ -23,10 +24,11 @@
     $team = mysqli_query($connect, $query);
   
     if($team){
-      set_message_teams('Team updated successfully!', 'success');
+      setNotification('Team updated successfully!');
       header('Location:../index.php');
     }
     else{
+      setNotification('Error: ' . mysqli_error($connect));
       echo 'Failed: ' . mysqli_error($connect);
     }
   }

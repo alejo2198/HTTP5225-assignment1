@@ -1,6 +1,8 @@
 <?php 
+session_start();
 include('../../reusable/nav.php'); 
 require('../../reusable/con.php');
+require('../../reusable/notification.php');
 
 $id = $_GET['id'];
 
@@ -17,12 +19,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $query = "UPDATE player SET full_name = '$full_name', first_name = '$first_name', last_name = '$last_name', is_active = '$is_active', team_id = '$team_id' WHERE id = $id";
     if (mysqli_query($connect, $query)) {
+        setNotification('Player updated successfully!');
         header("Location: index.php");
         exit();
     } else {
+        setNotification('Error: ' . mysqli_error($connect));
         echo "Error: " . $query . "<br>" . mysqli_error($connect);
+        exit();
     }
 }
+?>
+<?php 
+      require('../../reusable/con.php');
+      $query = 'SELECT * FROM team';
+      $teams = mysqli_query($connect, $query);
+
 ?>
 
 <!DOCTYPE html>
@@ -50,8 +61,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label class="form-check-label" for="is_active">Active</label>
             </div>
             <div class="mb-3">
-                <label for="team_id" class="form-label">Team ID</label>
-                <input type="number" class="form-control" id="team_id" name="team_id" value="<?php echo $player['team_id']; ?>" required>
+                <label for="team_id" class="form-label">Select a Team</label>
+                <select class="form-select" name="team_id" id="team_id">
+                    <?php
+                        foreach($teams as $team){
+                            if($team['id'] == $player['team_id']){
+                                echo '<option class="form-control" selected value="'. $team['id'].'">'. $team['full_name'] .'</option>';
+                            }else{
+                                echo '<option class="form-control" value="'. $team['id'].'">'. $team['full_name'] .'</option>';}
+                            }
+                    ?>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Update Player</button>
         </form>

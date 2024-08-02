@@ -1,9 +1,8 @@
 <?php
+  session_start();
   ini_set('display_errors', 1);
   ini_set('display_startup_errors', 1);
   error_reporting(E_ALL);
-
-  require('functions.php'); 
 
   $teamName = $_POST['teamName'];
   $teamAbbreviation = $_POST['teamAbbreviation'];
@@ -13,6 +12,7 @@
   $teamYearFounded = $_POST['teamYearFounded'];
 
   require('../../../reusable/con.php');
+  require('../../../reusable/notification.php');
 
   $query = "INSERT INTO team (
                 `full_name`,

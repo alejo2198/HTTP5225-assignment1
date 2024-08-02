@@ -1,8 +1,8 @@
   <?php
-    require('inc/functions.php');
+    session_start();
+    include('../../reusable/nav_admin_team.php');
+    require('../../reusable/notification.php');
   ?>
-
-<?php include('../../reusable/nav_admin_team.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
